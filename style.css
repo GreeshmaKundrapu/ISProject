@@ -1,3 +1,19 @@
+body{
+	background-image: url(https://live.staticflickr.com/8078/8314929977_28fd740070_b.jpg);
+  background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+  backdrop-filter: blur(5px);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+	background-attachment: fixed;
+	text-align:center;
+	padding: 5px;
+	height : 900px;
+}
+	
+
 .container {
   text-align: center;
   margin: 50px auto;
@@ -8,11 +24,15 @@ h1 {
 }
 
 button {
-  border: none;
-  background: none;
-  font-size: 32px;
-  color: #666;
+  background-color:#22cf3f;
+  padding:10px;
+  border-radius:20px;
+  font-size: 15px;
+  color: black;
   cursor: pointer;
+}
+button:focus {
+	outline:0;
 }
 
 button i.fa {
@@ -22,10 +42,30 @@ button i.fa {
 
 
 #text-input {
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 20px;
+  border-radius:20px;
   padding: 10px;
-  font-size: 24px;
+  font-size: 24px; 
   width: 400px;
+  
+          /*   padding: 10px;
+			font-size: 1.2rem;
+			border-radius: 5px;
+			border: none;
+			box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+			width: 100%;
+			margin-top: 10px;
+			margin-bottom: 20px;
+			box-sizing: border-box;
+			position: relative;*/
+}
+fieldset{
+	text-align: center;
+	border:none;
+	padding:2rem 0;
+	border-bottom:3px;
 }
 
 .hidden {
@@ -38,10 +78,11 @@ button i.fa {
 }
 
 #answer {
+  text-align: center;
   margin-top: 20px;
   font-size: 24px;
   font-weight: bold;
-  color: #3366cc;
+  color: rgb(255, 255, 255);
 }
 
 #answer-box {
@@ -52,5 +93,3 @@ button i.fa {
   width: 400px;
   display: none; /* add this line */
 }
-
-

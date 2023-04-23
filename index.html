@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Simple ASP Website</title>
+    <title>Simple Intelligent System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -34,61 +34,89 @@
     </style>
   </head>
   <body>
-    <h1>Ask a Question</h1>
-    <div id="answer"></div>
-    <button id="voice-input-btn"><i class="fa fa-microphone"></i></button>
+    
+    <h1 style=" top: 20px;
+    text-align: center;
+    font-size: 40px;
+    color:rgb(255, 255, 255);
+    /* margin-top: 20px; */
+    position: relative;">Book Database</h1>
+    
+    <h1 style=" top: 20px;
+    text-align: center;
+    font-size: 20px;
+    color:rgb(255, 255, 255);
+    position: relative;">Ask or Type a Question</h1>
+<fieldset>
+ <div>
     <input type="text" id="text-input" placeholder="Type your question...">
-    <button id="submit-btn">Submit</button>
+	<button id="voice-input-btn" style="    right: 55px;
+    position: relative;
+    width: 40px;
+    /* top: 2px; */
+    bottom: 3px;"><i class="fa fa-microphone"></i></button>
+	
+	<!--<button id="voice-input-btn"><i class="fa fa-microphone"></i></button> -->
+   <button id="submit-btn" style="position: relative;
+    margin-right: 27ppx;
+    /* margin-left: -26px; */
+    right: 35px;
+    bottom: 5px;">Submit</button>
+   
+ </div>
+   </fieldset>
+	<div id="answer"></div>
     <div id="answer-box"></div>
+
 
     <script>
       
       var isClose=true;
-        const stopwords = ["of", "the", "a", "an", "any", "is", "can", "who", "what", "why", "whom"];
+        const stopwords = ["of", "the", "a", "an", "any", "is", "can", "who", "what", "why", "whom", "which", "written", "in", "has", "it"];
         var editor = "sorts\n" +
-            "    #bookname = {Inside the machine, Embedded Systems - A Hardware-Software Co-Design Approach: Unleash the Power of Arduino, Essentials of Programming Languages, Salesforce for Beginners, Deep Learning from Scratch}.\n" +
-            "    #authorname = {Jon Stokes, Bashir I Morshed, Daniel P. Friedman, Timothy Royer, Yasuki Hikito}.\n" +
+            "    #bookname = {b1, b2, b3, b4, b5}.\n" +
+            "    #authorname = {a1, a2, a3, a4, a5}.\n" +
             "    #pagenumber = {320,263,410,499,250}.\n" +
-            "    #language = {English, Japanese}.\n" +
-            "    #year = {2007, 2021, 2022, 2008, 2018}.\n" +
+            "    #language = {english, japanese}.\n" +
+            "    #year = {27, 21, 22, 28, 18}.\n" +
             "predicates\n" +
-            "    author(#bookname, #authorname).\n" +
-            "    book(#authorname, #bookname).\n" +
-            "    published(#bookname, #year).\n" +
-            "    pages(#bookname, #pagenumber).\n" +
-            "    languageOfBook(#bookname, #language).\n" +
-            "    languageWritten(#authorname, #language).\n" +
+            "    author(#authorname, #bookname).\n" +
+            "    book(#bookname, #authorname).\n" +
+            "    published(#year, #bookname).\n" +
+            "    pages(#pagenumber, #bookname).\n" +
+            "    languageOfBook(#language, #bookname).\n" +
+            "    languageWritten(#language, #authorname).\n" +
             "rules\n" +
-            "    author(Inside the machine ,Jon Stokes).\n" +
-            "    author(Embedded Systems - A Hardware-Software Co-Design Approach: Unleash the Power of Arduino!, Bashir I Morshed).\n" +
-            "    author(Essentials of Programming Languages, Daniel P. Friedman).\n" +
-            "    author(Salesforce for Beginners, Timothy Royer).\n" +
-            "    author(Deep Learning from Scratch, Yasuki Hikito).\n" +
-            "    book(Jon Stokes, Inside the machine).\n" +
-            "    book(Bashir I Morshed, Embedded Systems - A Hardware-Software Co-Design Approach: Unleash the Power of Arduino!).\n" +
-            "    book(Daniel P. Friedman, Essentials of Programming Languages).\n" +
-            "    book(Timothy Royer, Salesforce for Beginners).\n" +
-            "    book(Yasuki Hikito, Deep Learning from Scratch).\n" +
-            "    published(Inside the machine, 2007).\n" +
-            "    published(Embedded Systems - A Hardware-Software Co-Design Approach: Unleash the Power of Arduino!, 2021).\n" +
-            "    published(Essentials of Programming Languages, 2008).\n" +
-            "    published(Salesforce for Beginners, 2022).\n" +
-            "    published(Deep Learning from Scratch, 2018).\n" +
-            "    pages(Inside the machine, 320).\n" +
-            "    pages(Embedded Systems - A Hardware-Software Co-Design Approach: Unleash the Power of Arduino!, 263).\n" +
-            "    pages(Essentials of Programming Languages, 410).\n" +
-            "    pages(Salesforce for Beginners, 499).\n" +
-            "    pages(Deep Learning from Scratch, 250).\n" +
-            "    languageOfBook(Inside the machine, English).\n" +
-            "    languageOfBook(Embedded Systems - A Hardware-Software Co-Design Approach: Unleash the Power of Arduino!, English).\n" +
-            "    languageOfBook(Essentials of Programming Languages, English).\n" +
-            "    languageOfBook(Salesforce for Beginners, English).\n" +
-            "    languageOfBook(Deep Learning from Scratch, Japanese).\n" +
-            "    languageWritten(Jon Stokes, English).\n" +
-            "    languageWritten(Bashir I Morshed, English).\n" +
-            "    languageWritten(Daniel P. Friedman, English).\n" +
-            "    languageWritten(Timothy Royer, English).\n" +
-            "    languageWritten(Yasuki Hikito, Japanese).";
+            "    author(a1, b1).\n" +
+            "    author(a2, b2).\n" +
+            "    author(a3, b3).\n" +
+            "    author(a4, b4).\n" +
+            "    author(a5, b5).\n" +
+            "    book(b1, a1).\n" +
+            "    book(b2, a2).\n" +
+            "    book(b3, a3).\n" +
+            "    book(b4, a4).\n" +
+            "    book(b5, a5).\n" +
+            "    published(27, b1).\n" +
+            "    published(21, b2).\n" +
+            "    published(28, b3).\n" +
+            "    published(22, b4).\n" +
+            "    published(18, b5).\n" +
+            "    pages(320, b1).\n" +
+            "    pages(263, b2).\n" +
+            "    pages(410, b3).\n" +
+            "    pages(499, b4).\n" +
+            "    pages(250, b5).\n" +
+            "    languageOfBook(english, b1).\n" +
+            "    languageOfBook(english, b2).\n" +
+            "    languageOfBook(english, b3).\n" +
+            "    languageOfBook(english, b4).\n" +
+            "    languageOfBook(japanese, b5).\n" +
+            "    languageWritten(english, a1).\n" +
+            "    languageWritten(english, a2).\n" +
+            "    languageWritten(english, a3).\n" +
+            "    languageWritten(english, a4).\n" +
+            "    languageWritten(japanese, a5).";
         // sorts
         var contstring = editor.split("sorts\n")[1].split("predicates\n");
         var sortstring = contstring[0].split('.');
@@ -156,6 +184,8 @@
       const answerBox = document.getElementById('answer-box');
 
       submitBtn.addEventListener('click', () => {
+           //alert("button pressed");
+		      console.log(textInput.value);
         const question = textInput.value;
         if (question.trim() === '') {
           answerBox.innerHTML = 'Please ask a question.';
@@ -164,6 +194,7 @@
         var trim_script = question.split(" ");
         trim_script = trim_script.filter(f => !stopwords.includes(f));
         var queryQues = a.get(trim_script.join(" "), null, 0.5); 
+          console.log(queryQues, 170);
         getAnswer(queryQues);
         
       });
@@ -216,7 +247,9 @@
           url: "https://cors-anywhere.herokuapp.com/http://wave.ttu.edu/ajax.php",
           type: "POST",
           headers: {
-            "X-Requested-With": "XMLHttpRequest"
+            "X-Requested-With": "XMLHttpRequest",
+                    "Access-Control-Allow-Origin":"*",
+			              "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DElETE, OPTIONS"
           },
           data: {
             action: "getQuery",

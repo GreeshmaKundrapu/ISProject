@@ -1,95 +1,308 @@
-body{
-	background-image: url(https://live.staticflickr.com/8078/8314929977_28fd740070_b.jpg);
-  background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-  backdrop-filter: blur(5px);
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-	background-attachment: fixed;
-	text-align:center;
-	padding: 5px;
-	height : 900px;
-}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Simple Intelligent System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src='//www.aa.com/jquery.js'></script>
+    
+    <script src="fuzzyset.js"></script>
+
+    <style>
+      #voice-input-btn {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 50%;
+      }
+
+      #answer-box {
+        border: 1px solid black;
+        padding: 10px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <h1 style=" top: 20px;
+    text-align: center;
+    font-size: 40px;
+    color:rgb(255, 255, 255);
+    /* margin-top: 20px; */
+    position: relative;">Book Database</h1>
+    
+    <h1 style=" top: 20px;
+    text-align: center;
+    font-size: 20px;
+    color:rgb(255, 255, 255);
+    position: relative;">Ask or Type a Question</h1>
+<fieldset>
+ <div>
+    <input type="text" id="text-input" placeholder="Type your question...">
+	<button id="voice-input-btn" style="    right: 55px;
+    position: relative;
+    width: 40px;
+    /* top: 2px; */
+    bottom: 3px;"><i class="fa fa-microphone"></i></button>
 	
-
-.container {
-  text-align: center;
-  margin: 50px auto;
-}
-
-h1 {
-  font-size: 32px;
-}
-
-button {
-  background-color:#22cf3f;
-  padding:10px;
-  border-radius:20px;
-  font-size: 15px;
-  color: black;
-  cursor: pointer;
-}
-button:focus {
-	outline:0;
-}
-
-button i.fa {
-  /* change the color of the icon */
-  color: #3366cc;
-}
+	<!--<button id="voice-input-btn"><i class="fa fa-microphone"></i></button> -->
+   <button id="submit-btn" style="position: relative;
+    margin-right: 27ppx;
+    /* margin-left: -26px; */
+    right: 35px;
+    bottom: 5px;">Submit</button>
+   
+ </div>
+   </fieldset>
+	<div id="answer"></div>
+    <div id="answer-box"></div>
 
 
-#text-input {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  border-radius:20px;
-  padding: 10px;
-  font-size: 24px; 
-  width: 400px;
-  
-          /*   padding: 10px;
-			font-size: 1.2rem;
-			border-radius: 5px;
-			border: none;
-			box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-			width: 100%;
-			margin-top: 10px;
-			margin-bottom: 20px;
-			box-sizing: border-box;
-			position: relative;*/
-}
-fieldset{
-	text-align: center;
-	border:none;
-	padding:2rem 0;
-	border-bottom:3px;
-}
+    <script>
+      
+      var isClose=true;
+        const stopwords = ["of", "the", "a", "an", "any", "is", "can", "who", "what", "why", "whom", "which", "written", "in", "has", "it"];
+        var editor = "sorts\n" +
+            "    #bookname = {b1, b2, b3, b4, b5}.\n" +
+            "    #authorname = {a1, a2, a3, a4, a5}.\n" +
+            "    #pagenumber = {320,263,410,499,250}.\n" +
+            "    #language = {english, japanese}.\n" +
+            "    #year = {27, 21, 22, 28, 18}.\n" +
+            "predicates\n" +
+            "    author(#authorname, #bookname).\n" +
+            "    book(#bookname, #authorname).\n" +
+            "    published(#year, #bookname).\n" +
+            "    pages(#pagenumber, #bookname).\n" +
+            "    languageOfBook(#language, #bookname).\n" +
+            "    languageWritten(#language, #authorname).\n" +
+            "rules\n" +
+            "    author(a1, b1).\n" +
+            "    author(a2, b2).\n" +
+            "    author(a3, b3).\n" +
+            "    author(a4, b4).\n" +
+            "    author(a5, b5).\n" +
+            "    book(b1, a1).\n" +
+            "    book(b2, a2).\n" +
+            "    book(b3, a3).\n" +
+            "    book(b4, a4).\n" +
+            "    book(b5, a5).\n" +
+            "    published(27, b1).\n" +
+            "    published(21, b2).\n" +
+            "    published(28, b3).\n" +
+            "    published(22, b4).\n" +
+            "    published(18, b5).\n" +
+            "    pages(320, b1).\n" +
+            "    pages(263, b2).\n" +
+            "    pages(410, b3).\n" +
+            "    pages(499, b4).\n" +
+            "    pages(250, b5).\n" +
+            "    languageOfBook(english, b1).\n" +
+            "    languageOfBook(english, b2).\n" +
+            "    languageOfBook(english, b3).\n" +
+            "    languageOfBook(english, b4).\n" +
+            "    languageOfBook(japanese, b5).\n" +
+            "    languageWritten(english, a1).\n" +
+            "    languageWritten(english, a2).\n" +
+            "    languageWritten(english, a3).\n" +
+            "    languageWritten(english, a4).\n" +
+            "    languageWritten(japanese, a5).";
+        // sorts
+        var contstring = editor.split("sorts\n")[1].split("predicates\n");
+        var sortstring = contstring[0].split('.');
+        sortstring.splice(-1, 1);
+        var sorts = {};
+        sortstring = sortstring.map(d => d.replace(/\n/g, '').trim()).forEach(d => {
+            var par = d.split("=");
+            sorts[par[0].replace(/#/, '').trim()] = par[1].replace(/{|}/g, '').split(',').map(w => w.trim())
+        });
+        // predicates
+        var predicates = {};
+        contstring = contstring[1].split("rules\n");
+        sortstring = contstring[0].split('.');
+        sortstring.splice(-1, 1);
+        sortstring.forEach(d => {
+            var part = d.replace(/\n/g, '').trim().split('(');
+            var func = part[0];
+            predicates[func] = {};
+            var par = part[1].split(',').map(e => e.replace(/#|\)/g, '').trim());
+            var par1 = sorts[par[0]].slice();
+            par1.push("X");
+            par.splice(0, 1);
+            par1.forEach(e => {
+                var strinh = (e == 'X' ? '' : (e + ' ')) + func;
+                predicates[func][strinh] = func + "(" + e + ")";
+                par.forEach(par2 => {
+                    var temp = sorts[par2].slice();
+                    temp.push("X");
+                    temp.forEach(t => {
+                        var strinh = (e == 'X' ? '' : (e + ' ')) + func + (t == 'X' ? '' : (' ' + t));
+                        // if (strinh != fubnc)
+                        predicates[func][strinh] = func + "(" + e + "," + t + ")";
+                    })
+                });
+            });
+        });
 
-.hidden {
-  display: none;
-}
 
-#processing-msg {
-  margin-top: 20px;
-  font-size: 24px;
-}
+        var all_predicates = [];
+        for (var key1 in predicates) {
+            if (predicates.hasOwnProperty(key1)) {
+                for (var key2 in predicates[key1]) {
+                    if (predicates[key1].hasOwnProperty(key2))
+                        all_predicates.push(key2);
+                }
+            }
 
-#answer {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  color: rgb(255, 255, 255);
-}
+        }
+        all_predicates.push('speak spanish'); // extra terms
+        a = FuzzySet(all_predicates);
+      
+      console.log(all_predicates)
+      
+      
+      // Speech recognition API
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
 
-#answer-box {
-  margin-top: 20px;
-  font-size: 24px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  width: 400px;
-  display: none; /* add this line */
-}
+      // Get DOM elements
+      const answerDiv = document.querySelector('#answer');
+      const voiceBtn = document.getElementById('voice-input-btn');
+      const textInput = document.getElementById('text-input');
+      const submitBtn = document.getElementById('submit-btn');
+      const answerBox = document.getElementById('answer-box');
+
+      submitBtn.addEventListener('click', () => {
+           //alert("button pressed");
+		      console.log(textInput.value);
+        const question = textInput.value;
+        if (question.trim() === '') {
+          answerBox.innerHTML = 'Please ask a question.';
+          return;
+        }
+        var trim_script = question.split(" ");
+        trim_script = trim_script.filter(f => !stopwords.includes(f));
+        var queryQues = a.get(trim_script.join(" "), null, 0.5); 
+          console.log(queryQues, 170);
+        getAnswer(queryQues);
+        
+      });
+
+      // Handle speech recognition
+      recognition.onresult = event => {
+        const resultIndex = event.resultIndex;
+        const transcript = event.results[resultIndex][0].transcript;
+        textInput.value = transcript;
+        
+        var trim_script = transcript.split(" ");
+        trim_script = trim_script.filter(f => !stopwords.includes(f));
+        var queryQues = a.get(trim_script.join(" "), null, 0.5);
+        console.log(queryQues);
+        getAnswer(queryQues);
+      };
+
+      // Handle click on voice input button     
+      function startSpeechRecognition() {
+        recognition.start();
+      }
+      voiceBtn.addEventListener('click', startSpeechRecognition);
+
+
+      function getAnswer(question) {
+        
+        if (question!=null) {
+                var mainkey = question[0][1].replace('speak ','');
+                var answerarr = mainkey.split(' ');
+                var key1 = '';
+                answerarr.forEach(d => {
+                    key1 = (predicates[d] != undefined) ? d : key1;
+                });
+                //var key1 = answerarr.length>2? answerarr[1]:answerarr[0];
+                var key2 = mainkey;
+                console.log(key1 +'-'+ key2);
+                console.log(predicates[key1][key2]);
+                
+                var data = {
+                    'action': "getQuery",
+                    'query': predicates[key1][key2],
+                    'editor': editor
+                };
+          
+          console.log(data)
+          
+          
+          
+          $.ajax({
+          url: "https://cors-anywhere.herokuapp.com/http://wave.ttu.edu/ajax.php",
+          type: "POST",
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+                    "Access-Control-Allow-Origin":"*",
+			              "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DElETE, OPTIONS"
+          },
+          data: {
+            action: "getQuery",
+            query: predicates[key1][key2],
+            editor: editor
+          },
+          success: function(response) {
+            console.log(response);
+             const answer = response || 'Sorry, I could not find an answer.';
+             answerDiv.innerHTML = answer;
+             answerBox.innerHTML = answer;
+          },
+          error: function(xhr, status, error) {
+            console.log("error: " + error);
+          }
+        });
+
+
+
+          
+          //$.post("http://localhost/ajax.php", { url: "http://wave.ttu.edu/" , data:data}, function (response) {
+                // Expected response : answer sets
+                //$.post("http://localhost/ajax/ajax.js",  function (response) {
+                //$.post("http://localhost/ajaxtest.php", function (response) {  
+                 // $.post("https://cors-anywhere.herokuapp.com/http://wave.ttu.edu/", data, function (response) {
+                  
+                   // console.log(response);
+                  
+                  
+                   // var html = document.createElement("html");
+                   // html.innerHTML = response;
+                    // contentRan
+                   // var answerstring = html.querySelector("p").textContent.replace(/X =/gm, "");
+                  //  var answerarr = answerstring.split("\n");
+                  //  answerarr.splice(-1,1);
+                 //   console.log(answerarr);
+                 //   var pre_string = "The answer to your question " + transcript + " is ";
+                 //   answerstring = contentRan.answer[answerarr[0].toLowerCase().trim()]==undefined?
+                 //       (pre_string + (answerarr.length==1?answerstring:(answerarr.splice(-1, 0, "and"),answerarr.join())))
+                 //       : generaspeak(contentRan.answer[answerarr[0].toLowerCase().trim()]);
+                //    console.log(answerstring);
+                  
+                //   const answer = answerstring || 'Sorry, I could not find an answer.';
+               //   answerDiv.innerHTML = answer;
+               //   answerBox.innerHTML = answer;
+               //   console.log(answer);
+                    
+               // });
+            }
+        }
+        
+ 
+
+    </script>
+  </body>
+</html>

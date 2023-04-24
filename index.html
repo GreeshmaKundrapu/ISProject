@@ -72,13 +72,13 @@
     <script>
       
       var isClose=true;
-        const stopwords = ["of", "the", "a", "an", "any", "is", "can", "who", "what", "why", "whom", "which", "written", "in", "has", "it", "when", "how", "many"];
+        const stopwords = ["of", "the", "a", "an", "any", "is", "can", "who", "what", "why", "whom", "which", "written", "in", "has", "it"];
         var editor = "sorts\n" +
-            "    #bookname = {insideTheMachine, embeddedSystems, essentialsOfProgrammingLanguages, salesforceForBeginners, deepLearningFromScratch}.\n" +
-            "    #authorname = {jonStokes, bashirIMorshed, danielPFriedman , timothyRoyer, yasukiHikito}.\n" +
+            "    #bookname = {b1, b2, b3, b4, b5}.\n" +
+            "    #authorname = {a1, a2, a3, a4, a5}.\n" +
             "    #pagenumber = {320,263,410,499,250}.\n" +
             "    #language = {english, japanese}.\n" +
-            "    #year = {twoThousandSeven, twoThousandTwentyOne, twoThousandTwentyTwo, twoThousandEighteen, twoThousandEight}.\n" +
+            "    #year = {27, 21, 22, 28, 18}.\n" +
             "predicates\n" +
             "    author(#authorname, #bookname).\n" +
             "    book(#bookname, #authorname).\n" +
@@ -87,36 +87,36 @@
             "    languageOfBook(#language, #bookname).\n" +
             "    languageWritten(#language, #authorname).\n" +
             "rules\n" +
-            "    author(jonStokes, insideTheMachine).\n" +
-            "    author(bashirIMorshed, embeddedSystems).\n" +
-            "    author(danielPFriedman, essentialsOfProgrammingLanguages).\n" +
-            "    author(timothyRoyer, salesforceForBeginners).\n" +
-            "    author(yasukiHikito, deepLearningFromScratch).\n" +
-            "    book(insideTheMachine, jonStokes).\n" +
-            "    book(embeddedSystems, bashirIMorshed).\n" +
-            "    book(essentialsOfProgrammingLanguages, danielPFriedman).\n" +
-            "    book(salesforceForBeginners, timothyRoyer).\n" +
-            "    book(deepLearningFromScratch, yasukiHikito).\n" +
-            "    published(twoThousandSeven, insideTheMachine).\n" +
-            "    published(twoThousandTwentyOne, embeddedSystems).\n" +
-            "    published(twoThousandEight, essentialsOfProgrammingLanguages).\n" +
-            "    published(twoThousandTwentyTwo, salesforceForBeginners).\n" +
-            "    published(twoThousandEighteen, deepLearningFromScratch).\n" +
-            "    pages(320, insideTheMachine).\n" +
-            "    pages(263, embeddedSystems).\n" +
-            "    pages(410, essentialsOfProgrammingLanguages).\n" +
-            "    pages(499, salesforceForBeginners).\n" +
-            "    pages(250, deepLearningFromScratch).\n" +
-            "    languageOfBook(english, insideTheMachine).\n" +
-            "    languageOfBook(english, embeddedSystems).\n" +
-            "    languageOfBook(english, essentialsOfProgrammingLanguages).\n" +
-            "    languageOfBook(english, salesforceForBeginners).\n" +
-            "    languageOfBook(japanese, deepLearningFromScratch).\n" +
-            "    languageWritten(english, jonStokes).\n" +
-            "    languageWritten(english, bashirIMorshed).\n" +
-            "    languageWritten(english, danielPFriedman).\n" +
-            "    languageWritten(english, timothyRoyer).\n" +
-            "    languageWritten(japanese, yasukiHikito).";
+            "    author(a1, b1).\n" +
+            "    author(a2, b2).\n" +
+            "    author(a3, b3).\n" +
+            "    author(a4, b4).\n" +
+            "    author(a5, b5).\n" +
+            "    book(b1, a1).\n" +
+            "    book(b2, a2).\n" +
+            "    book(b3, a3).\n" +
+            "    book(b4, a4).\n" +
+            "    book(b5, a5).\n" +
+            "    published(27, b1).\n" +
+            "    published(21, b2).\n" +
+            "    published(28, b3).\n" +
+            "    published(22, b4).\n" +
+            "    published(18, b5).\n" +
+            "    pages(320, b1).\n" +
+            "    pages(263, b2).\n" +
+            "    pages(410, b3).\n" +
+            "    pages(499, b4).\n" +
+            "    pages(250, b5).\n" +
+            "    languageOfBook(english, b1).\n" +
+            "    languageOfBook(english, b2).\n" +
+            "    languageOfBook(english, b3).\n" +
+            "    languageOfBook(english, b4).\n" +
+            "    languageOfBook(japanese, b5).\n" +
+            "    languageWritten(english, a1).\n" +
+            "    languageWritten(english, a2).\n" +
+            "    languageWritten(english, a3).\n" +
+            "    languageWritten(english, a4).\n" +
+            "    languageWritten(japanese, a5).";
         // sorts
         var contstring = editor.split("sorts\n")[1].split("predicates\n");
         var sortstring = contstring[0].split('.');

@@ -74,11 +74,11 @@
       var isClose=true;
         const stopwords = ["of", "the", "a", "an", "any", "is", "can", "who", "what", "why", "whom", "which", "written", "in", "has", "it", "when", "how", "many"];
         var editor = "sorts\n" +
-            "    #bookname = {insideTheMachine, embeddedSystems, essentialsOfProgrammingLanguages, salesforceForBeginners, deepLearningFromScratch}.\n" +
-            "    #authorname = {jonStokes, bashirIMorshed, danielPFriedman , timothyRoyer, yasukiHikito}.\n" +
-            "    #pagenumber = {320,263,410,499,250}.\n" +
+            "    #bookname = {insideTheMachine, embeddedSystems, essentialsOfProgrammingLanguages, salesforceForBeginners, deepLearningFromScratch, robotLocalizationAndMapBuilding, remoteAndTelerobotics, mobileRobotsNavigation, serviceRobotApplications, artificialIntelligence, reinforcementLearning, advancedMachineLearningWithPython, ethicalArtificialIntelligence}.\n" +
+            "    #authorname = {jonStokes, bashirIMorshed, danielPFriedman , timothyRoyer, yasukiHikito, hanafiahYussof, nicolasMollet, alejandraBarrera, yoshihikoTakahashi, davidLPoole, richardSSutton, johnHearty, billHibbard}.\n" +
+            "    #pagenumber = {320,263,410,499,250,588,230, 682, 410, 820, 548, 278, 177}.\n" +
             "    #language = {english, japanese}.\n" +
-            "    #year = {twoThousandSeven, twoThousandTwentyOne, twoThousandTwentyTwo, twoThousandEighteen, twoThousandEight}.\n" +
+            "    #year = {twoThousandSeven, twoThousandTwentyOne, twoThousandTwentyTwo, twoThousandEighteen, twoThousandEight, twoThousandTen, twoThousandSeventeen, twoThousandSixteen, twoThousandFifteen}.\n" +
             "predicates\n" +
             "    author(#authorname, #bookname).\n" +
             "    book(#bookname, #authorname).\n" +
@@ -92,31 +92,80 @@
             "    author(danielPFriedman, essentialsOfProgrammingLanguages).\n" +
             "    author(timothyRoyer, salesforceForBeginners).\n" +
             "    author(yasukiHikito, deepLearningFromScratch).\n" +
+            "    author(hanafiahYussof, robotLocalizationAndMapBuilding).\n" +
+            "    author(nicolasMollet, remoteAndTelerobotics).\n" +
+            "    author(alejandraBarrera, mobileRobotsNavigation).\n" +
+            "    author(yoshihikoTakahashi, serviceRobotApplications ).\n" +
+            "    author(davidLPoole, artificialIntelligence).\n" +
+            "    author(richardSSutton, reinforcementLearning).\n" +
+            "    author(johnHearty , advancedMachineLearningWithPython).\n" +
+            "    author(billHibbard , ethicalArtificialIntelligence).\n" +
             "    book(insideTheMachine, jonStokes).\n" +
             "    book(embeddedSystems, bashirIMorshed).\n" +
             "    book(essentialsOfProgrammingLanguages, danielPFriedman).\n" +
             "    book(salesforceForBeginners, timothyRoyer).\n" +
             "    book(deepLearningFromScratch, yasukiHikito).\n" +
+            "    book(robotLocalizationAndMapBuilding, hanafiahYussof).\n" +
+            "    book(remoteAndTelerobotics, nicolasMollet).\n" +
+            "    book(mobileRobotsNavigation, alejandraBarrera).\n" +
+            "    book(serviceRobotApplications, yoshihikoTakahashi).\n" +
+            "    book(artificialIntelligence, davidLPoole).\n" +
+            "    book(reinforcementLearning, richardSSutton).\n" +
+            "    book(advancedMachineLearningWithPython, johnHearty).\n" +
+            "    book(ethicalArtificialIntelligence, billHibbard).\n" +
             "    published(twoThousandSeven, insideTheMachine).\n" +
             "    published(twoThousandTwentyOne, embeddedSystems).\n" +
             "    published(twoThousandEight, essentialsOfProgrammingLanguages).\n" +
             "    published(twoThousandTwentyTwo, salesforceForBeginners).\n" +
             "    published(twoThousandEighteen, deepLearningFromScratch).\n" +
+            "    published(twoThousandTen, robotLocalizationAndMapBuilding).\n" +
+            "    published(twoThousandTen, remoteAndTelerobotics).\n" +
+            "    published(twoThousandTen, mobileRobotsNavigation).\n" +
+            "    published(twoThousandEight, serviceRobotApplications).\n" +
+            "    published(twoThousandSeventeen, artificialIntelligence).\n" +
+            "    published(twoThousandEighteen, reinforcementLearning).\n" +
+            "    published(twoThousandSixteen, advancedMachineLearningWithPython).\n" +
+            "    published(twoThousandFifteen, ethicalArtificialIntelligence).\n" +
             "    pages(320, insideTheMachine).\n" +
             "    pages(263, embeddedSystems).\n" +
             "    pages(410, essentialsOfProgrammingLanguages).\n" +
             "    pages(499, salesforceForBeginners).\n" +
             "    pages(250, deepLearningFromScratch).\n" +
+            "    pages(588, robotLocalizationAndMapBuilding).\n" +
+            "    pages(230, remoteAndTelerobotics).\n" +
+            "    pages(682, mobileRobotsNavigation).\n" +
+            "    pages(410, serviceRobotApplications).\n" +
+            "    pages(820, artificialIntelligence).\n" +
+            "    pages(548, reinforcementLearning).\n" +
+            "    pages(278, advancedMachineLearningWithPython).\n" +
+            "    pages(177, ethicalArtificialIntelligence).\n" +
             "    languageOfBook(english, insideTheMachine).\n" +
             "    languageOfBook(english, embeddedSystems).\n" +
             "    languageOfBook(english, essentialsOfProgrammingLanguages).\n" +
             "    languageOfBook(english, salesforceForBeginners).\n" +
             "    languageOfBook(japanese, deepLearningFromScratch).\n" +
+            "    languageOfBook(english, robotLocalizationAndMapBuilding).\n" +
+            "    languageOfBook(english, remoteAndTelerobotics).\n" +
+            "    languageOfBook(english, mobileRobotsNavigation).\n" +
+            "    languageOfBook(english, serviceRobotApplications).\n" +
+            "    languageOfBook(english, artificialIntelligence).\n" +
+            "    languageOfBook(english, reinforcementLearning).\n" +
+            "    languageOfBook(english, advancedMachineLearningWithPython).\n" +
+            "    languageOfBook(english, ethicalArtificialIntelligence).\n" +
             "    languageWritten(english, jonStokes).\n" +
             "    languageWritten(english, bashirIMorshed).\n" +
             "    languageWritten(english, danielPFriedman).\n" +
             "    languageWritten(english, timothyRoyer).\n" +
-            "    languageWritten(japanese, yasukiHikito).";
+            "    languageWritten(japanese, yasukiHikito).\n" +
+            "    languageWritten(english, hanafiahYussof).\n" +
+            "    languageWritten(english, nicolasMollet).\n" +
+            "    languageWritten(english, alejandraBarrera).\n" +
+            "    languageWritten(english, yoshihikoTakahashi).\n" +
+            "    languageWritten(english, davidLPoole).\n" +
+            "    languageWritten(english, richardSSutton).\n" +
+            "    languageWritten(english, johnHearty).\n" +       
+            "    languageWritten(english, billHibbard).";
+            
         // sorts
         var contstring = editor.split("sorts\n")[1].split("predicates\n");
         var sortstring = contstring[0].split('.');
